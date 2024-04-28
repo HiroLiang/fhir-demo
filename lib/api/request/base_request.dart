@@ -3,8 +3,10 @@ enum HttpMethod { get, post, put, delete }
 abstract class BaseRequest {
   // 定義請求類型
   HttpMethod get method;
+
   // 定義 host 對象，預設請求路徑
   String get host => 'https://host-to-fhir-server:port';
+
   // 定義請求 path 與 query string 與 path variable
   String get pathTemplate;
   String getPath() {
@@ -13,6 +15,7 @@ abstract class BaseRequest {
       String key = match.group(1)!;
       return pathVar[key] ?? match.group(0)!;
     });
+
     // 填充 query string
     if (queryStr.isNotEmpty) {
       final String params =
